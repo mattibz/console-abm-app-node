@@ -14,6 +14,7 @@ const execute = async () => {
 
         opt = await inquirerMenu();
         
+        console.log({opt});
 
         switch(opt){
             case '1':
