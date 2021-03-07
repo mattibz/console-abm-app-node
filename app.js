@@ -1,4 +1,4 @@
-const { inquirerMenu,next,readInput } = require('./helpers/assistant');
+const { inquirerMenu,next,readInput,saveData,readData } = require('./helpers/assistant');
 const { Task } = require('./models/task');
 const { Tasks } = require('./models/tasks');
 
@@ -10,11 +10,16 @@ const execute = async () => {
 
     const tasks = new Tasks();
 
+    loadtasks =  readData();
+
+    if(loadtasks){ // load  task from json
+        tasks.loadTasksFromArray(loadtasks);
+    }
+
     do{
 
         opt = await inquirerMenu();
         
-        console.log({opt});
 
         switch(opt){
             case '1':
@@ -25,10 +30,13 @@ const execute = async () => {
 
             case '2':
             //list tasks
+            //console.log(tasks.list);
             console.log(tasks._list);
             break;
         }
-        
+
+        saveData(tasks._list);
+
         await next();
 
         
