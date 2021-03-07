@@ -72,6 +72,33 @@ const next = async() => {
 }
 
 
+const readInput = async( message ) => {
+
+    const question = [
+      {
+          type:'input',
+          name:'desc',
+          message,
+          validate ( value ){
+
+              if(value.length === 0){
+                  return 'Please enter description!';
+              }
+
+              return true;
+          }
+      }
+    ];
+
+    const { desc }  = inquirer.prompt(question);
+
+    return desc;
+
+}
+
+
 module.exports = {
-  inquirerMenu,next
+  inquirerMenu,
+  next,
+  readInput
 }
