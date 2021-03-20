@@ -44,7 +44,7 @@ const menu_settings = [
 
 const inquirerMenu = async() => {
 
-  console.clear();
+  //console.clear();
   console.log(' ===================='.yellow);
   console.log(`${'['.yellow}   Select option    ${']'.yellow}`);
   console.log(' ====================\n'.yellow);

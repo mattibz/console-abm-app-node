@@ -12,7 +12,7 @@ const execute = async () => {
 
     loadtasks =  readData();
 
-    if(loadtasks){ // load  task from json
+    if(loadtasks){ // load  tasks from json
         tasks.loadTasksFromArray(loadtasks);
     }
 
@@ -30,8 +30,7 @@ const execute = async () => {
 
             case '2':
             //list tasks
-            //console.log(tasks.list);
-            console.log(tasks._list);
+            tasks.listTasks();
             break;
         }
 
