@@ -1,4 +1,4 @@
-const { inquirerMenu,next,readInput,saveData,readData } = require('./helpers/assistant');
+const { inquirerMenu,next,readInput,saveData,readData,deleteMenu,confirm} = require('./helpers/assistant');
 const { Task } = require('./models/task');
 const { Tasks } = require('./models/tasks');
 
@@ -24,13 +24,46 @@ const execute = async () => {
         switch(opt){
             case '1':
             //create task
-             const desc = await readInput('enter description: ');
-             tasks.createTask(desc);
+
+                const desc = await readInput('enter description: ');
+                tasks.createTask(desc);
             break;
 
             case '2':
             //list tasks
-            tasks.listTasks();
+
+                tasks.listTasks();
+            break;
+
+            case '3':
+            //list complete status task
+
+                tasks.getStatusTask(true);
+            break;
+
+            case '4':
+            //list pending status task
+
+                tasks.getStatusTask(false);
+            break;
+
+            case '6':
+            //delete task
+
+                let id = await deleteMenu(tasks._list);
+
+                if(id !== '0'){
+                    
+                    let verify = await confirm('are you sure you want to delete this task?..'.yellow);
+                
+                    if(verify){
+
+                         tasks.deleteTask(id);
+                         console.log(`task ${id} deleted`.green);
+                    }
+
+                }
+
             break;
         }
 

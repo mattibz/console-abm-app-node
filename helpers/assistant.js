@@ -44,7 +44,7 @@ const menu_settings = [
 
 const inquirerMenu = async() => {
 
-  //console.clear();
+  console.clear();
   console.log(' ===================='.yellow);
   console.log(`${'['.yellow}   Select option    ${']'.yellow}`);
   console.log(' ====================\n'.yellow);
@@ -123,10 +123,65 @@ const readData = () => {
 }
 
 
+
+const deleteMenu = async(tasks = []) => {
+
+   const choices =  Object.keys(tasks).map(function(key, index) {
+
+        let obj_tmp = tasks[key];
+
+        const idx = index + 1;
+        
+        return{
+            value: obj_tmp.id,
+            name:`${idx} - ${obj_tmp.desc}`
+        }
+    });
+
+    choices.unshift({
+         value:'0',
+         name:'0 - Cancelar'
+    });
+
+    const questions_tmp = [
+        {
+            type:'list',
+            name:'id',
+            message:'Delete',
+            choices
+
+        }
+    ];
+
+    const  { id } = await inquirer.prompt(questions_tmp);
+
+    return id;
+  
+}
+
+
+const confirm = async (message) => {
+
+    const question = [
+        {
+            type:'confirm',
+            name :'ok',
+            message:message
+        }
+    ];
+
+    const  { ok } = await inquirer.prompt(question);
+
+    return ok;
+
+}
+
 module.exports = {
   inquirerMenu,
   next,
   readInput,
   saveData,
-  readData
+  readData,
+  deleteMenu,
+  confirm
 }
