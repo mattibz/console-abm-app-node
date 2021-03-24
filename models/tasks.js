@@ -97,6 +97,34 @@ class Tasks{
         
     }
 
+
+    switchToCompleted (ids = []){
+
+        ids.forEach(id => {
+
+            const load_task = this._list[id];
+
+            if(!load_task.completedIn){
+                load_task.completedIn = new Date().toISOString();
+            }
+
+        });
+
+        Object.keys(this._list).forEach(key => {
+
+            let tmp_task = this._list[key];
+
+            if(!ids.includes(tmp_task.id)){
+
+                    this._list[key].completedIn = null;
+            }
+
+        });
+
+    }
+
+    
+
 }
 
 module.exports = {

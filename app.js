@@ -1,4 +1,14 @@
-const { inquirerMenu,next,readInput,saveData,readData,deleteMenu,confirm} = require('./helpers/assistant');
+const { 
+    inquirerMenu,
+    next,
+    readInput,
+    saveData,
+    readData,
+    deleteMenu,
+    confirm,
+    checklistMenu
+} = require('./helpers/assistant');
+
 const { Task } = require('./models/task');
 const { Tasks } = require('./models/tasks');
 
@@ -45,6 +55,11 @@ const execute = async () => {
             //list pending status task
 
                 tasks.getStatusTask(false);
+            break;
+
+            case '5':
+                const ids = await checklistMenu(tasks._list);
+                tasks.switchToCompleted(ids);
             break;
 
             case '6':

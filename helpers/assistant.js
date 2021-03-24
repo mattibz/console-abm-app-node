@@ -176,6 +176,43 @@ const confirm = async (message) => {
 
 }
 
+
+
+
+const checklistMenu = async(tasks = []) => {
+
+    const choices =  Object.keys(tasks).map(function(key, index) {
+ 
+         let obj_tmp = tasks[key];
+ 
+         const idx = index + 1;
+         
+         return{
+             value: obj_tmp.id,
+             name:`${idx} - ${obj_tmp.desc}`,
+             checked: (obj_tmp.completedIn) ? true : false
+         }
+
+     });
+
+ 
+     const question = [
+         {
+             type:'checkbox',
+             name:'ids',
+             message:'Select',
+             choices
+ 
+         }
+     ];
+ 
+     const  { ids } = await inquirer.prompt(question);
+ 
+     return ids;
+   
+ }
+
+
 module.exports = {
   inquirerMenu,
   next,
@@ -183,5 +220,6 @@ module.exports = {
   saveData,
   readData,
   deleteMenu,
-  confirm
+  confirm,
+  checklistMenu
 }
